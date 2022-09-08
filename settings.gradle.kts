@@ -3,21 +3,19 @@ include("app")
 
 pluginManagement {
     repositories {
-        maven {
-            url = uri("https://repo.grdev.net/artifactory/ext-snapshots-local")
-        }
+        mavenLocal()
         gradlePluginPortal()
     }
     plugins {
-        kotlin("jvm") version ("1.7.255-SNAPSHOT")
+        val kotlinCompilerVersion = "1.8.0-dev-2494"
+        kotlin("jvm") version kotlinCompilerVersion
+        id("org.jetbrains.kotlin.plugin.value.container.assignment") version kotlinCompilerVersion
     }
 }
 
 dependencyResolutionManagement {
     repositories {
-        maven {
-            url = uri("https://repo.grdev.net/artifactory/ext-snapshots-local")
-        }
+        mavenLocal()
         mavenCentral()
     }
 }
