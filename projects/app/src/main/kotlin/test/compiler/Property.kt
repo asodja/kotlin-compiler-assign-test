@@ -18,3 +18,11 @@ fun <T> Property<T>.assign(v: T) {
 fun <T> Property<T>.assign(v: Property<T>) {
     this.set(v)
 }
+
+fun main() {
+    val javaCompile = JavaCompile()
+    javaCompile.sourceCompatibility = "5"
+    javaCompile.apply {
+        sourceCompatibility = "42"
+    }
+}

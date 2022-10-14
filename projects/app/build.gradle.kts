@@ -1,8 +1,13 @@
+@file:Suppress("UnstableApiUsage")
+
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
+    id("test")
     kotlin("jvm")
-    id("org.jetbrains.kotlin.plugin.value.container.assignment")
+    kotlin("plugin.sam.with.receiver")
+    kotlin("plugin.assignment")
 }
 
 dependencies {
@@ -10,14 +15,25 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
 }
 
-valueContainerAssignment {
+assignment {
     annotation("test.compiler.SupportsAssign")
-}
-
-tasks.withType<KotlinCompile>().configureEach {
-    kotlinOptions.useK2 = false
 }
 
 tasks.named<Test>("test") {
     useJUnitPlatform()
+}
+abstract class MyTask : DefaultTask() {
+    @get:Input
+    abstract val input: Property<String>
+    @get:OutputDirectory
+    abstract val output: RegularFileProperty
+    @TaskAction
+    fun taskAction() {
+        output.asFile.get().writeText(input.get())
+    }
+}
+
+tasks.register<MyTask>("myTask") {
+    input = "Hello world3"
+    output = File("$buildDir/myTask/hello-world.txt")
 }
