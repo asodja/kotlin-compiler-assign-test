@@ -30,11 +30,13 @@ dependencyResolutionManagement {
     }
 }
 
-data class Container(val property: Property<String>)
-val container = Container(gradle.serviceOf<ObjectFactory>().property(String::class.java)).apply {
-    property = "Hello world"
-}
-println("Settings.gradle.kts: ${container.property.get()}")
+//val objects = gradle.serviceOf<ObjectFactory>()
+//objects.fileProperty()
+//data class Container(val property: Property<String>)
+//val container = Container(gradle.serviceOf<ObjectFactory>().property(String::class.java)).apply {
+//    property = "Hello world"
+//}
+//println("Settings.gradle.kts: ${container.property.get()}")
 
 for (project in rootProject.children) {
     project.projectDir = file("projects/${project.name}")

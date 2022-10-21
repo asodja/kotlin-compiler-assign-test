@@ -22,3 +22,16 @@ repositories {
 assignment {
     annotation(SupportsKotlinAssignmentOverloading::class.qualifiedName!!)
 }
+
+afterEvaluate {
+    kotlinDslPluginOptions {
+        tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+            kotlinOptions {
+                jvmTarget = this@kotlinDslPluginOptions.jvmTarget.get()
+                apiVersion = "1.7"
+                languageVersion = "1.7"
+                freeCompilerArgs += (org.gradle.kotlin.dsl.provider.KotlinDslPluginSupport.kotlinCompilerArgs + "-Xuse-ir")
+            }
+        }
+    }
+}

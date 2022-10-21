@@ -1,8 +1,5 @@
 @file:Suppress("UnstableApiUsage")
 
-import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     id("test")
     kotlin("jvm")
@@ -21,24 +18,4 @@ assignment {
 
 tasks.named<Test>("test") {
     useJUnitPlatform()
-}
-abstract class MyTask : DefaultTask() {
-    @get:Input
-    abstract val input: Property<String>
-    @get:OutputDirectory
-    abstract val output: RegularFileProperty
-    @TaskAction
-    fun taskAction() {
-        output.asFile.get().writeText(input.get())
-    }
-}
-
-fun Property<String>.assign(v: Int) {
-    this.set(v.toString())
-}
-
-tasks.register<MyTask>("myTask") {
-    input = "Hello world"
-    input = 42
-    output = File("$buildDir/myTask/hello-world.txt")
 }

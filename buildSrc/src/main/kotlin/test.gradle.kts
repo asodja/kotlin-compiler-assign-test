@@ -9,4 +9,7 @@ abstract class SomeTask : DefaultTask() {
 
 tasks.register<SomeTask>("some") {
     value = "Hello"
+    doLast {
+        println("Hello: ${value.get()}")
+    }
 }
