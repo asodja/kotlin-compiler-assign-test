@@ -28,9 +28,3 @@ tasks.withType<KotlinCompile> {
     compilerOptions.noJdk.set(false) // Go to declaration works
     compilerOptions.noJdk = false // Go to declaration works
 }
-
-java.docsDir.set(file("src/docs")) // no error
-java.docsDir = file("src/docs") // an error, but should not be
-java {
-    docsDir = file("src/docs") // no error
-}
