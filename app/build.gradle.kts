@@ -17,14 +17,8 @@ tasks.named<Test>("test") {
     useJUnitPlatform()
 }
 
-tasks.withType<JavaCompile> {
-    // Options is Java type
-    options.incrementalAfterFailure.set(false) // Go to declaration works
-    options.incrementalAfterFailure = false // Go to declaration doesn't work
-}
-
-tasks.withType<KotlinCompile> {
-    // CompilerOptions is Kotlin type
-    compilerOptions.noJdk.set(false) // Go to declaration works
-    compilerOptions.noJdk = false // Go to declaration works
+java.docsDir.set(file("src/docs")) // no error
+java.docsDir = file("src/docs") // an error, but should not be
+java {
+    docsDir = file("src/docs") // no error
 }
