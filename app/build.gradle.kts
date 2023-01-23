@@ -16,9 +16,3 @@ dependencies {
 tasks.named<Test>("test") {
     useJUnitPlatform()
 }
-
-java.docsDir.set(file("src/docs")) // no error
-java.docsDir = file("src/docs") // an error, but should not be
-java {
-    docsDir = file("src/docs") // no error
-}
