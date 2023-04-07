@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.8.0"
+    kotlin("jvm") version "1.8.20"
 }
 
 repositories {
@@ -16,6 +16,8 @@ dependencies {
 tasks.named<Test>("test") {
     useJUnitPlatform()
 }
+
+java.docsDir = file("build/docs/javadoc")
 
 tasks.withType<JavaCompile> {
     // Options is Java type
